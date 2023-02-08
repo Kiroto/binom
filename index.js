@@ -21,20 +21,10 @@ const functB = (x) => {
 const iterator = (a, b, maxErr, funct, tableResults = []) => {
     const avg = (b + a) / 2;
     const avgRes = funct(avg);
-    const currentErr = (b - a) / 2;
+    const currentErr = Math.abs((b - a) / 2);
     const aRes = funct(a);
     const bRes = funct(b);
     tableResults.push([a, b, avg, aRes, bRes, avgRes, currentErr]);
-
-    // console.log(
-    //     `${a.toFixed(8).padStart(15)}|${b.toFixed(8).padStart(15)}|${avg
-    //         .toFixed(8)
-    //         .padStart(15)}|${aRes.toFixed(8).padStart(15)}|${bRes
-    //         .toFixed(8)
-    //         .padStart(15)}|${avgRes.toFixed(8).padStart(15)}|${currentErr
-    //         .toFixed(8)
-    //         .padStart(15)}`
-    // );
 
     if (currentErr < maxErr) {
         return tableResults;
