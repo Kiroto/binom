@@ -1,8 +1,8 @@
 // const { math } = require("./mathjs");
 
-const exprInput = document.getElementById("formula")
-const aInput = document.getElementById("aNumber")
-const bInput = document.getElementById("bNumber")
+const exprInput = document.getElementById("formula");
+const aInput = document.getElementById("aNumber");
+const bInput = document.getElementById("bNumber");
 const errInput = document.getElementById("maxError");
 
 const outputDiv = document.getElementById("output");
@@ -24,7 +24,7 @@ const iterator = (a, b, maxErr, funct, tableResults = []) => {
     const currentErr = (b - a) / 2;
     const aRes = funct(a);
     const bRes = funct(b);
-    tableResults.push([a, b, avg, aRes, bRes, avgRes, currentErr])
+    tableResults.push([a, b, avg, aRes, bRes, avgRes, currentErr]);
 
     // console.log(
     //     `${a.toFixed(8).padStart(15)}|${b.toFixed(8).padStart(15)}|${avg
@@ -41,51 +41,60 @@ const iterator = (a, b, maxErr, funct, tableResults = []) => {
     }
 
     if (Math.sign(avgRes) == Math.sign(aRes)) {
-        a = avg
+        a = avg;
     } else {
-        b = avg
+        b = avg;
     }
     return iterator(a, b, maxErr, funct, tableResults);
 };
 
 actionButton.onclick = (evt) => {
     const scope = {
-        "e": Math.E
-    }
-    const inputStr = "f(x) =" + exprInput.value
-    console.log(inputStr)
+        e: Math.E,
+    };
+    const inputStr = "f(x) =" + exprInput.value;
+    console.log(inputStr);
     const f = math.evaluate(inputStr, scope);
-    const a = parseFloat(aInput.value)
+    const a = parseFloat(aInput.value);
     const b = parseFloat(bInput.value);
     const maxErr = parseFloat(errInput.value);
-    const ress = iterator(a, b, maxErr, f);
-    let opHtml = `
-    <table>
-    <tr>
-        <th>a</th>
-        <th>b</th>
-        <th>xMed</th>
-        <th>f(a)</th>
-        <th>f(b)</th>
-        <th>f(xMed)</th>
-        <th>err</th>
-    </tr>
-    `
-    ress.forEach(res => {
-        opHtml += `
+
+    const fa = f(a)
+    const fb = f(b)
+
+    let opHtml = ""
+    if (Math.sign(fa) == Math.sign(fb)) {
+        opHtml = `<div class="error">f(a) (${fa}) y f(b) (${fb}) tienen el mismo signo. Para poder aproximar con este algoritmo deben tener signos opuestos.</div>`;
+    } else {
+        const ress = iterator(a, b, maxErr, f);
+        opHtml = `
+        <table>
         <tr>
-            <td>${res[0]}</td>
-            <td>${res[1]}</td>
-            <td>${res[2]}</td>
-            <td>${res[3]}</td>
-            <td>${res[4]}</td>
-            <td>${res[5]}</td>
-            <td>${res[6]}</td>
+            <th>a</th>
+            <th>b</th>
+            <th>xMed</th>
+            <th>f(a)</th>
+            <th>f(b)</th>
+            <th>f(xMed)</th>
+            <th>err</th>
         </tr>
         `;
-    });
-    opHtml += "</table>";
-    outputDiv.innerHTML = opHtml
-}
+        ress.forEach((res) => {
+            opHtml += `
+            <tr>
+                <td>${res[0]}</td>
+                <td>${res[1]}</td>
+                <td class="xMed">${res[2]}</td>
+                <td>${res[3]}</td>
+                <td>${res[4]}</td>
+                <td>${res[5]}</td>
+                <td>${res[6]}</td>
+            </tr>
+            `;
+        });
+        opHtml += "</table>";
+    }
+    outputDiv.innerHTML = opHtml;
+};
 // const approx = iterator(0, 1, 0.005, functB);
 // console.log(approx);
