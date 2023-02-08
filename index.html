@@ -1,32 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La vaina de hacer trampa en el examen</title>
-</head>
-<style>
-    .xMed {
-        font-weight: bold;
-    }
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>La vaina de hacer trampa en el examen</title>
+    </head>
+    <style>
+        .xMed {
+            font-weight: bold;
+        }
 
-    .error {
-        color: #440000
-    }
-</style>
-<body>
-    <label for="formula">Formula</label>
-    <input type="text" name="formula" id="formula">
-    <label for="maxError">Error Maximo</label>
-    <input type="number" name="maxError" id="maxError">
-    <label for="aNumber">Numero A</label>
-    <input type="number" name="aNumber" id="aNumber">
-    <label for="bNumber">Numero B</label>
-    <input type="number" name="bNumber" id="bNumber">
-    <button id="executeButton">Ejecutar</button>
-    <div id="output"></div>
-</body>
-<script src="math.js" type="text/javascript"></script>
-<script src="index.js" type="text/javascript"></script>
+        .error {
+            color: #440000;
+        }
+
+        .math {
+            font-size: 1.5em;
+            font-family: monospace;
+        }
+
+        table {
+             border-collapse: collapse;
+        }
+
+        td {
+            border: 2px;
+            border-left-style: solid;
+        }
+
+        td:first-child,
+        th:first-child {
+            border-left: none;
+        }
+    </style>
+    <body>
+        <label for="formula">Formula</label>
+        <input type="text" name="formula" id="formula" value="e^x-x-11"/>
+        <label for="maxError">Error Maximo</label>
+        <input type="number" name="maxError" id="maxError" value="0.005" />
+        <label for="aNumber">Numero A</label>
+        <input type="number" name="aNumber" id="aNumber" value="1"/>
+        <label for="bNumber">Numero B</label>
+        <input type="number" name="bNumber" id="bNumber" value="3" />
+        <button id="executeButton">Ejecutar</button>
+        <div id="output"></div>
+    </body>
+    <script src="math.js" type="text/javascript"></script>
+    <script src="index.js" type="text/javascript"></script>
 </html>

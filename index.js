@@ -38,6 +38,13 @@ const iterator = (a, b, maxErr, funct, tableResults = []) => {
     return iterator(a, b, maxErr, funct, tableResults);
 };
 
+spaceIfPositive = (no) => {
+    if (no < 0) {
+        return `${no}`
+    }
+    return `+${no}`
+}
+
 actionButton.onclick = (evt) => {
     const scope = {
         e: Math.E,
@@ -58,7 +65,7 @@ actionButton.onclick = (evt) => {
     } else {
         const ress = iterator(a, b, maxErr, f);
         opHtml = `
-        <table>
+        <table class="math">
         <tr>
             <th>a</th>
             <th>b</th>
@@ -72,13 +79,13 @@ actionButton.onclick = (evt) => {
         ress.forEach((res) => {
             opHtml += `
             <tr>
-                <td>${res[0]}</td>
-                <td>${res[1]}</td>
-                <td class="xMed">${res[2]}</td>
-                <td>${res[3]}</td>
-                <td>${res[4]}</td>
-                <td>${res[5]}</td>
-                <td>${res[6]}</td>
+                <td>${spaceIfPositive(res[0])}</td>
+                <td>${spaceIfPositive(res[1])}</td>
+                <td class="xMed">${spaceIfPositive(res[2])}</td>
+                <td>${spaceIfPositive(res[3])}</td>
+                <td>${spaceIfPositive(res[4])}</td>
+                <td>${spaceIfPositive(res[5])}</td>
+                <td>${spaceIfPositive(res[6])}</td>
             </tr>
             `;
         });
@@ -86,5 +93,5 @@ actionButton.onclick = (evt) => {
     }
     outputDiv.innerHTML = opHtml;
 };
-// const approx = iterator(0, 1, 0.005, functB);
-// console.log(approx);
+
+actionButton.onclick()
